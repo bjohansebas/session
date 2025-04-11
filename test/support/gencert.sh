@@ -1,12 +1,9 @@
-#! /bin/sh
+#!/usr/bin/env bash
 set -e
 
 # Detect OS
 OS="$(uname -s)"
 
-# Define file paths
-KEY_PATH="./test/fixtures/server.key"
-CERT_PATH="./test/fixtures/server.crt"
 SUBJ="/C=US/ST=Illinois/L=Chicago/O=node-express-session/CN=express-session.local"
 
 if [[ "$OS" == MINGW* || "$OS" == MSYS* ]]; then

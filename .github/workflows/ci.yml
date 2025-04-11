@@ -39,7 +39,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         node-version:
-          - "0.8"
           - "0.10"
           - "0.12"
           - "4"
@@ -65,10 +64,6 @@ jobs:
         # Use supported versions of our testing tools under older versions of Node
         # Install npm in some specific cases where we need to
         include:
-          - name: Node.js 0.8
-            node-version: "0.8"
-            npm-i: mocha@2.5.3 supertest@1.1.0
-            npm-rm: nyc
           - node-version: "0.10"
             npm-i: "mocha@3.5.3 nyc@10.3.2 supertest@2.0.0"
             # Npm isn't being installed on windows w/ setup-node for
@@ -130,10 +125,6 @@ jobs:
         run: |
           npm config set loglevel error
         shell: bash
-
-      - name: Remove npm module(s) ${{ matrix.npm-rm }}
-        run: npm rm --silent --save-dev ${{ matrix.npm-rm }}
-        if: matrix.npm-rm != ''
 
       - name: Install Node version specific dev deps
         if: ${{ matrix.npm-i != '' }}

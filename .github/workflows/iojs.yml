@@ -62,6 +62,15 @@ jobs:
       run: npm rm --silent --save-dev ${{ matrix.npm-rm }}
       if: matrix.npm-rm != ''
 
+    - name: Remove eslint
+      shell: bash
+      run: |
+        # eslint for linting
+        node -pe 'Object.keys(require("./package").devDependencies).join("\n")' | \
+          grep -E '^eslint(-|$)' | \
+          sort -r | \
+          xargs -n1 npm rm --silent --save-dev
+
     - name: Install Node.js dependencies
       run: npm install
 
